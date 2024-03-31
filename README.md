@@ -8,7 +8,7 @@ Multiple Stories to come ....
 ## How to Play
 1. **Installation**: Clone the repository to your local machine:
 ```bash
-https://github.com/Dawit-Sh/Prometheus.git
+git clone https://github.com/Dawit-Sh/Prometheus.git
 ```
 2. **Navigate to the Game Directory**: Enter the game directory
 ```bash
