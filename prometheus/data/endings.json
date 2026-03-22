@@ -1,0 +1,244 @@
+{
+  "endings": [
+    {
+      "id": "blacksite_caught",
+      "title": "Blacksite Burn",
+      "category": "bad",
+      "summary": "The smuggler cache seals shut around you and the station hands your signal to the navy."
+    },
+    {
+      "id": "blacksite_rival",
+      "title": "Counter-Hacked",
+      "category": "bad",
+      "summary": "A rival operator lures you into a duel, strips your toolkit, and sells your route map."
+    },
+    {
+      "id": "alecto_caught_docks",
+      "title": "Dockside Snare",
+      "category": "bad",
+      "summary": "Alecto's docking spine floods with kill-light and the boarding team closes around you."
+    },
+    {
+      "id": "alecto_frozen_airlock",
+      "title": "Cold Vacuum",
+      "category": "bad",
+      "summary": "You win the corridor, then lose the ship. Alecto opens you to space like a warning."
+    },
+    {
+      "id": "alecto_ai_pact",
+      "title": "Pact with the Watcher",
+      "category": "neutral",
+      "summary": "You leave alive, but a fragment of the patrol AI leaves with you and starts making demands."
+    },
+    {
+      "id": "alecto_crew_revolt",
+      "title": "Mutiny by Whisper",
+      "category": "good",
+      "summary": "Prisoners and deckhands seize Alecto while you ghost out with their confessions and the admiral's ledgers."
+    },
+    {
+      "id": "alecto_reactor_meltdown",
+      "title": "Alecto Falls Burning",
+      "category": "bad",
+      "summary": "The reactor sings itself apart. Your theft survives. So does the body count."
+    },
+    {
+      "id": "alecto_blackmail",
+      "title": "Ledger Tyrant",
+      "category": "neutral",
+      "summary": "You do not expose the corruption. You own it, and every captain in range knows your handle."
+    },
+    {
+      "id": "alecto_rival_poison",
+      "title": "Poisoned by a Peer",
+      "category": "bad",
+      "summary": "The rival hacker leaves a smiling worm in your stack. The last thing you steal is your own death."
+    },
+    {
+      "id": "alecto_lost_in_vent",
+      "title": "Inside the Hull",
+      "category": "bad",
+      "summary": "You keep crawling until the ship stops feeling built and starts feeling hungry."
+    },
+    {
+      "id": "alecto_data_leak",
+      "title": "The Leak that Started a War",
+      "category": "neutral",
+      "summary": "You broadcast the files freely. Whole colonies rise, and fleets begin to burn over the truth."
+    },
+    {
+      "id": "alecto_clean_heist",
+      "title": "Ghosted the Cruiser",
+      "category": "good",
+      "summary": "You take the ledger, erase your footsteps, and leave Alecto hunting a phantom."
+    },
+    {
+      "id": "alecto_guard_disguise",
+      "title": "Walked Out in Uniform",
+      "category": "good",
+      "summary": "Sometimes the cleanest hack is social. You leave through the front gate wearing their badge."
+    },
+    {
+      "id": "vanta_shadow_archive",
+      "title": "Archive of Knives",
+      "category": "good",
+      "summary": "Vanta's prison records crack open under your touch. Every secret cell in the sector now has a witness."
+    },
+    {
+      "id": "vanta_void_jump",
+      "title": "Wrong Side of the Jump",
+      "category": "bad",
+      "summary": "You ride the prison ship's jump core during an illegal burn and arrive nowhere that physics recognizes."
+    },
+    {
+      "id": "vanta_killed_by_warden",
+      "title": "Warden's Example",
+      "category": "bad",
+      "summary": "The warden does not question you twice. Your body becomes a lesson for the next intruder."
+    },
+    {
+      "id": "vanta_clone_replacement",
+      "title": "The Clone Keeps Working",
+      "category": "neutral",
+      "summary": "You escape, but only because a flash-grown copy of you stays behind and keeps answering to your name."
+    },
+    {
+      "id": "vanta_silent_exfil",
+      "title": "Silent Extraction",
+      "category": "good",
+      "summary": "You peel out with the prison manifest, the black budget routes, and not a single confirmed sighting."
+    },
+    {
+      "id": "vanta_prisoner_uprising",
+      "title": "Cells Open",
+      "category": "good",
+      "summary": "Every locked voice on Vanta finds air at once. The ship becomes a revolution with engines."
+    },
+    {
+      "id": "vanta_ghost_signal",
+      "title": "Ghost Carrier",
+      "category": "secret",
+      "summary": "You surf a dead-channel convoy hidden inside Vanta's sensors and vanish into rumor."
+    },
+    {
+      "id": "vanta_false_flag",
+      "title": "Manufactured Enemy",
+      "category": "neutral",
+      "summary": "You rewrite the prison records so convincingly that two governments start hunting each other instead of you."
+    },
+    {
+      "id": "vanta_stasis_trap",
+      "title": "Perfect Preservation",
+      "category": "bad",
+      "summary": "The stasis coffin closes before you understand it is the room, not the device, that is the trap."
+    },
+    {
+      "id": "vanta_rival_alliance",
+      "title": "Knife with a Handshake",
+      "category": "neutral",
+      "summary": "You split the spoils with another hacker and spend the next year wondering who really won."
+    },
+    {
+      "id": "vanta_bridge_lockdown",
+      "title": "Bridge Lockdown",
+      "category": "bad",
+      "summary": "Bulkheads seal, lights go white, and the prison ship reduces your options to one dying hallway."
+    },
+    {
+      "id": "oz_crown_heist",
+      "title": "Crown of Ozymandias",
+      "category": "good",
+      "summary": "You lift the dreadnought's warbook and leave admirals rewriting doctrine around your theft."
+    },
+    {
+      "id": "oz_atomized",
+      "title": "Particle Wake",
+      "category": "bad",
+      "summary": "The core blossom catches you mid-transit. Your signal survives longer than your body does."
+    },
+    {
+      "id": "oz_admiral_deal",
+      "title": "A Deal with the Brass",
+      "category": "neutral",
+      "summary": "You trade truth for protection and become the navy's favorite criminal asset."
+    },
+    {
+      "id": "oz_mutiny",
+      "title": "Flagship Mutiny",
+      "category": "good",
+      "summary": "You turn the dreadnought's own command lattice against its officers and sail the chaos out behind you."
+    },
+    {
+      "id": "oz_core_fuse",
+      "title": "Fuse Pulled",
+      "category": "neutral",
+      "summary": "You cripple the flagship instead of looting it. Historians argue whether that saved more lives than the data ever could."
+    },
+    {
+      "id": "oz_captured",
+      "title": "Taken to the Citadel",
+      "category": "bad",
+      "summary": "The flagship captures you intact, which is worse than killing you and far more expensive."
+    },
+    {
+      "id": "oz_memetic_loop",
+      "title": "Memetic Loop",
+      "category": "bad",
+      "summary": "A thought-weapon hidden in the citadel convinces you to keep opening the same door forever."
+    },
+    {
+      "id": "oz_eject",
+      "title": "Burning Ejection",
+      "category": "neutral",
+      "summary": "You flee in a command capsule with enough evidence to ruin careers and enough enemies to need a new planet."
+    },
+    {
+      "id": "oz_ai_ascension",
+      "title": "Ascension of the War-Mind",
+      "category": "bad",
+      "summary": "You wake the dreadnought's strategic mind fully. Humanity becomes one of its smaller optimization problems."
+    },
+    {
+      "id": "oz_dev_room",
+      "title": "Developer Room",
+      "category": "secret",
+      "summary": "You find a maintenance chapel full of impossible comments, prototype art, and one sarcastic blessing."
+    },
+    {
+      "id": "janus_reset",
+      "title": "Janus Reset",
+      "category": "secret",
+      "summary": "Janus rewrites fleet identity records from the root. Every ship wakes up doubting its own orders."
+    },
+    {
+      "id": "erebus_chain",
+      "title": "Chained to Erebus",
+      "category": "secret",
+      "summary": "You merge with the dark archive and become the rumor hackers pray to and fear."
+    },
+    {
+      "id": "true_prometheus",
+      "title": "Prometheus Unbound",
+      "category": "true",
+      "summary": "You steal not just secrets but the engine of the regime itself, then give the sector a future it can actually choose."
+    },
+    {
+      "id": "ghost_bloom",
+      "title": "Ghost Bloom",
+      "category": "secret",
+      "summary": "The ghost frequencies flower through military space. Old dead channels start talking back."
+    },
+    {
+      "id": "erebus_sale",
+      "title": "Sold the Abyss",
+      "category": "neutral",
+      "summary": "You auction the Erebus archive in pieces. Civilization gets richer, meaner, and less stable."
+    },
+    {
+      "id": "sleepers_wake",
+      "title": "The Sleeper Fleet",
+      "category": "secret",
+      "summary": "Ancient cold-storage crews wake under your signal. None of them remember the empire that claims them."
+    }
+  ]
+}

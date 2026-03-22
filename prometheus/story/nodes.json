@@ -1,0 +1,1845 @@
+{
+  "start_node": "start_boot",
+  "nodes": [
+    {
+      "id": "start_boot",
+      "location": "Needlejack Skiff // Approach Vector",
+      "text": "Welcome to Prometheus, an exhilarating space adventure where you play as a skilled hacker infiltrating military starships to obtain classified information. Navigate through security protocols, evade detection, and outsmart security forces to accomplish your objectives.\n\nThe skiff drifts in the blind wedge between patrol sweeps while your deck lights pulse a surgical green. Three military ships and one contraband relay wait ahead. Your stack can only be tuned one way before you burn in.",
+      "choices": [
+        {
+          "id": "stealth_loadout",
+          "text": "Tune the intrusion mesh for silence and movement.",
+          "next_node": "ship_select",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "stealth": 2
+            },
+            "inventory_add": [
+              "camouflage mesh"
+            ]
+          }
+        },
+        {
+          "id": "int_loadout",
+          "text": "Load heuristic solvers and predictive attack trees.",
+          "next_node": "ship_select",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "intelligence": 2
+            },
+            "inventory_add": [
+              "heuristic stack"
+            ]
+          }
+        },
+        {
+          "id": "forged_ident",
+          "text": "Spin up a forged officer identity with polished metadata.",
+          "next_node": "ship_select",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "reputation": 1
+            },
+            "inventory_add": [
+              "forged ident"
+            ]
+          }
+        },
+        {
+          "id": "zero_day",
+          "text": "Buy a naval zero-day off a screaming dead drop.",
+          "next_node": "ship_select",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "intelligence": 1,
+              "trace": 1
+            },
+            "inventory_add": [
+              "zero-day exploit"
+            ]
+          }
+        },
+        {
+          "id": "ghost_contact",
+          "text": "Answer the unsigned Ghost Signal ping anyway.",
+          "next_node": "ship_select",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "stealth": 1
+            },
+            "inventory_add": [
+              "ghost frequency map"
+            ],
+            "flags_add": [
+              "ghost_contact"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ship_select",
+      "location": "Starfield // Theater Overview",
+      "text": "Three military hulls dominate the tac-grid. CRS Alecto patrols the frontier lanes like a knife looking for a throat. ISS Vanta moves prisoners, witnesses, and state secrets under blackout law. Dreadnought Ozymandias carries admirals, war doctrine, and enough firepower to edit maps.\n\nA smugglers' blacksite flickers nearby, and an old briefing cache waits if you want context before commitment.",
+      "choices": [
+        {
+          "id": "board_alecto",
+          "text": "Infiltrate CRS Alecto, the patrol cruiser hunting insurgent cells.",
+          "next_node": "alecto_entry",
+          "risk": "warning",
+          "effects": {
+            "flags_add": [
+              "target_alecto"
+            ]
+          }
+        },
+        {
+          "id": "board_vanta",
+          "text": "Slip into ISS Vanta, the prison ship with disappearing manifests.",
+          "next_node": "vanta_entry",
+          "risk": "warning",
+          "effects": {
+            "flags_add": [
+              "target_vanta"
+            ]
+          }
+        },
+        {
+          "id": "board_oz",
+          "text": "Risk the flagship Ozymandias and go straight for the nerve center.",
+          "next_node": "oz_entry",
+          "risk": "danger",
+          "effects": {
+            "flags_add": [
+              "target_oz"
+            ]
+          }
+        },
+        {
+          "id": "raid_blacksite",
+          "text": "Raid the smugglers' blacksite for contraband before the main job.",
+          "next_node": "blacksite_cache",
+          "risk": "warning"
+        },
+        {
+          "id": "review_dossiers",
+          "text": "Review stolen dossiers and shape your opening narrative.",
+          "next_node": "dossier_room",
+          "risk": "safe"
+        }
+      ]
+    },
+    {
+      "id": "dossier_room",
+      "location": "Briefing Cache // Cold Storage",
+      "text": "The dossier cache is stitched together from intercepted officer mail, dockworker superstition, and a few pages that still smell like burnt polymer. Each packet costs time, but time spent here may save your skin later.\n\n[LOG FRAGMENT] 'Prometheus-class intrusions are no longer hypothetical. Command requests counter-ghost doctrine.'",
+      "choices": [
+        {
+          "id": "dossier_alecto",
+          "text": "Memorize Alecto maintenance routes and petty officer gossip.",
+          "next_node": "ship_select",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "intelligence": 1
+            },
+            "flags_add": [
+              "know_alecto"
+            ]
+          }
+        },
+        {
+          "id": "dossier_vanta",
+          "text": "Scrape Vanta prison transfer anomalies and black-book names.",
+          "next_node": "ship_select",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "intelligence": 1,
+              "reputation": 1
+            },
+            "flags_add": [
+              "know_vanta"
+            ]
+          }
+        },
+        {
+          "id": "dossier_oz",
+          "text": "Decode Ozymandias officer chatter and command rivalries.",
+          "next_node": "ship_select",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "intelligence": 1
+            },
+            "flags_add": [
+              "know_oz"
+            ]
+          }
+        },
+        {
+          "id": "tag_rival",
+          "text": "Plant a rumor that a rival hacker is working this sector.",
+          "next_node": "ship_select",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "reputation": 1
+            },
+            "flags_add": [
+              "rival_hacker_pinged"
+            ]
+          }
+        },
+        {
+          "id": "lift_bleach",
+          "text": "Pocket a packet of signal bleach and clear your telemetry.",
+          "next_node": "ship_select",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "trace": -1
+            },
+            "inventory_add": [
+              "signal bleach"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "blacksite_cache",
+      "location": "Smuggler Relay // Blacksite Cache",
+      "text": "The relay is a cathedral built from stolen cargo pods and bad decisions. Military sealant peels off the crates in long strips. Somewhere deeper in the structure, a rival operator is either shopping or hunting.\n\nA thin internal channel plays an old joke in machine voice: 'Nothing inside is legal, including the geometry.'",
+      "choices": [
+        {
+          "id": "take_quantum_key",
+          "text": "Lift the quantum key from a cryo-safe before the lock cycles.",
+          "next_node": "ship_select",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "trace": 1
+            },
+            "inventory_add": [
+              "quantum key"
+            ]
+          }
+        },
+        {
+          "id": "take_janus",
+          "text": "Rip a Janus token out of a military escrow crate.",
+          "next_node": "ship_select",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "trace": 1,
+              "intelligence": 1
+            },
+            "inventory_add": [
+              "janus token"
+            ]
+          }
+        },
+        {
+          "id": "take_veil",
+          "text": "Take the null veil cloak folded inside contraband foam.",
+          "next_node": "ship_select",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "stealth": 1
+            },
+            "inventory_add": [
+              "null veil"
+            ]
+          }
+        },
+        {
+          "id": "duel_rival",
+          "text": "Chase the rival hacker through the relay and settle it live.",
+          "next_node": "ending_blacksite_rival",
+          "risk": "danger",
+          "effects": {
+            "flags_add": [
+              "rival_hacker_pinged"
+            ]
+          }
+        },
+        {
+          "id": "overstay",
+          "text": "Keep searching after the sweep timer goes red.",
+          "next_node": "ending_blacksite_caught",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "alecto_entry",
+      "location": "CRS Alecto // Docking Spine",
+      "text": "Alecto is all hard corners, disciplined lighting, and corridors wide enough for troops to run shoulder to shoulder. The cruiser's internal systems still think in patrol rhythms: inspection, sweep, silence, repeat. A petty officer is grumbling on a maintenance line about missing coolant seals and bad coffee.\n\nYou have one clean insertion window before the dock lattice decides you are a person worth naming.",
+      "choices": [
+        {
+          "id": "alecto_maintenance_route",
+          "text": "Ghost through the maintenance ribs while the patrol rotates.",
+          "next_node": "alecto_maintenance",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "stealth": 1
+            }
+          }
+        },
+        {
+          "id": "alecto_security_route",
+          "text": "Spoof a security audit packet and enter through compliance.",
+          "next_node": "alecto_security",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "intelligence": 1
+            }
+          }
+        },
+        {
+          "id": "alecto_brig_route",
+          "text": "Tap crew gossip and ride a service lift toward the brig decks.",
+          "next_node": "alecto_brig",
+          "risk": "warning"
+        },
+        {
+          "id": "alecto_vault_route",
+          "text": "Piggyback a cargo lifter aimed at sealed evidence storage.",
+          "next_node": "alecto_vault",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 1
+            }
+          }
+        },
+        {
+          "id": "alecto_bruteforce",
+          "text": "Brute-force the dock lattice before the sentries finish their tea.",
+          "next_node": "ending_alecto_caught_docks",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "alecto_maintenance",
+      "location": "CRS Alecto // Maintenance Ribs",
+      "text": "Condensation beads on the ribs like cold sweat. Beneath the deck plating you hear two ships at once: the official Alecto, all procedures and patrol routes, and a quieter body of shortcuts, patched panels, and unsanctioned cabling. Somebody has hidden a prayer in the coolant diagnostics. Somebody else answered it.\n\nThis is where disciplined machines start admitting they need secrets.",
+      "choices": [
+        {
+          "id": "am_to_vault",
+          "text": "Climb the coolant scaffold toward the command vault.",
+          "next_node": "alecto_vault",
+          "risk": "warning"
+        },
+        {
+          "id": "am_to_security",
+          "text": "Bridge into a repeater nest and jump to security control.",
+          "next_node": "alecto_security",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "intelligence": 1
+            }
+          }
+        },
+        {
+          "id": "am_to_bridge",
+          "text": "Follow the command bus and surface near the bridge spine.",
+          "next_node": "alecto_bridge",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 1
+            }
+          }
+        },
+        {
+          "id": "am_reactor",
+          "text": "Plant a parasite in the reactor governor and let physics argue later.",
+          "next_node": "ending_alecto_reactor_meltdown",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 2
+            }
+          }
+        },
+        {
+          "id": "am_lost",
+          "text": "Keep crawling beyond the mapped conduits.",
+          "next_node": "ending_alecto_lost_in_vent",
+          "risk": "danger"
+        },
+        {
+          "id": "am_ghost",
+          "text": "Tune the ghost shard against the coolant hymn and follow the hidden channel.",
+          "next_node": "ghost_signal_hub",
+          "risk": "safe",
+          "conditions": {
+            "inventory": [
+              "ghost shard"
+            ]
+          },
+          "effects": {
+            "flags_add": [
+              "ghost_path_open"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "alecto_security",
+      "location": "CRS Alecto // Security Control",
+      "text": "Security Control is arranged like a lit confession booth: clear sightlines, filtered air, and enough authentication prompts to make paranoia look ergonomic. Incident reports scroll down one side of the glass. On the other, an analyst has left a game of hex-chess open beside live airlock controls.\n\nAlecto trusts paperwork almost as much as violence.",
+      "choices": [
+        {
+          "id": "as_bridge",
+          "text": "Steal an officer lanyard and walk straight toward the bridge.",
+          "next_node": "alecto_bridge",
+          "risk": "warning",
+          "effects": {
+            "inventory_add": [
+              "officer lanyard"
+            ]
+          }
+        },
+        {
+          "id": "as_brig",
+          "text": "Crack the cryo manifest and route yourself toward the brig decks.",
+          "next_node": "alecto_brig",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "intelligence": 1
+            }
+          }
+        },
+        {
+          "id": "as_vault",
+          "text": "Open the vault audit trail and slip through its blind spot.",
+          "next_node": "alecto_vault",
+          "risk": "warning"
+        },
+        {
+          "id": "as_airlock",
+          "text": "Cycle the sentries into an airlock and trust the vacuum to keep secrets.",
+          "next_node": "ending_alecto_frozen_airlock",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 1
+            }
+          }
+        },
+        {
+          "id": "as_ai_pact",
+          "text": "Accept the patrol AI's offer of mutual discretion.",
+          "next_node": "ending_alecto_ai_pact",
+          "risk": "warning",
+          "effects": {
+            "flags_add": [
+              "watcher_pact"
+            ]
+          }
+        },
+        {
+          "id": "as_janus",
+          "text": "Inject the Janus token into the security lattice while alarms are suppressed.",
+          "next_node": "janus_hub",
+          "risk": "danger",
+          "conditions": {
+            "inventory": [
+              "janus token"
+            ]
+          },
+          "effects": {
+            "flags_add": [
+              "janus_seen_on_alecto"
+            ],
+            "stats": {
+              "trace": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "alecto_brig",
+      "location": "CRS Alecto // Brig Deck",
+      "text": "The brig deck smells like antiseptic and resentment. Prisoners trade fragments of songs through the walls. A captured intruder in cell six smiles the instant your intrusion signature brushes the local mesh, which means your reputation arrived before you did.\n\nSomeone here can help you, betray you, or start a fire big enough to count as policy.",
+      "choices": [
+        {
+          "id": "ab_revolt",
+          "text": "Open the cells and hand the crew a reason to mutiny.",
+          "next_node": "ending_alecto_crew_revolt",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 2
+            },
+            "flags_add": [
+              "crew_revolt_triggered"
+            ]
+          }
+        },
+        {
+          "id": "ab_disguise",
+          "text": "Put on a guard's routine, posture, and badge until even you believe it.",
+          "next_node": "ending_alecto_guard_disguise",
+          "risk": "safe",
+          "effects": {
+            "inventory_add": [
+              "guard uniform"
+            ]
+          }
+        },
+        {
+          "id": "ab_vault",
+          "text": "Trade with the quartermaster for the ledgers stored in evidence.",
+          "next_node": "alecto_vault",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "reputation": 1
+            }
+          }
+        },
+        {
+          "id": "ab_rival",
+          "text": "Question the captured rival and take the handshake they offer.",
+          "next_node": "ending_alecto_rival_poison",
+          "risk": "danger",
+          "conditions": {
+            "flags_any": [
+              "rival_hacker_pinged"
+            ]
+          }
+        },
+        {
+          "id": "ab_security",
+          "text": "Strip the brig logs for hidden Janus references and jump back to control.",
+          "next_node": "alecto_security",
+          "risk": "safe",
+          "effects": {
+            "flags_add": [
+              "alecto_janus_logs"
+            ],
+            "stats": {
+              "intelligence": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "alecto_vault",
+      "location": "CRS Alecto // Command Vault",
+      "text": "The command vault is quiet in the expensive way. Biometric locks pulse under lacquered steel. Inside the archive, casualty projections sit beside procurement fraud, black budgets, and private messages officers never expected to outlive them.\n\nEverything here is weaponized memory.",
+      "choices": [
+        {
+          "id": "av_clean",
+          "text": "Copy the private ledgers, close the door, and vanish cleanly.",
+          "next_node": "ending_alecto_clean_heist",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "stealth": 1
+            }
+          }
+        },
+        {
+          "id": "av_leak",
+          "text": "Dump the files into the public mesh without waiting for a buyer.",
+          "next_node": "ending_alecto_data_leak",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "reputation": 1
+            }
+          }
+        },
+        {
+          "id": "av_blackmail",
+          "text": "Keep the ledger and start calling people by their secret names.",
+          "next_node": "ending_alecto_blackmail",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "reputation": 2
+            }
+          }
+        },
+        {
+          "id": "av_bridge",
+          "text": "Use the executive archive to pivot toward the bridge command net.",
+          "next_node": "alecto_bridge",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 1
+            }
+          }
+        },
+        {
+          "id": "av_ghost",
+          "text": "Route the archive through ghost frequencies nobody officially uses.",
+          "next_node": "ghost_signal_hub",
+          "risk": "safe",
+          "conditions": {
+            "inventory": [
+              "ghost shard"
+            ]
+          },
+          "effects": {
+            "flags_add": [
+              "ghost_archive_routed"
+            ]
+          }
+        },
+        {
+          "id": "av_janus",
+          "text": "Use the vault's sealed prototype channel to pursue the Janus root.",
+          "next_node": "janus_hub",
+          "risk": "warning",
+          "conditions": {
+            "inventory": [
+              "janus token"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "alecto_bridge",
+      "location": "CRS Alecto // Bridge Spine",
+      "text": "The bridge spine hums with tactical overlays and restrained panic. Officers talk in clipped half-sentences designed for people who are never supposed to be surprised. Through the armored glass, Alecto's running lights drag green lines across the hull of a civilian freighter it has decided to inspect.\n\nYou are close enough now that every choice feels less like theft and more like authorship.",
+      "choices": [
+        {
+          "id": "abr_ai",
+          "text": "Let the patrol AI own the aftermath if it gets you out alive.",
+          "next_node": "ending_alecto_ai_pact",
+          "risk": "warning",
+          "effects": {
+            "flags_add": [
+              "watcher_pact"
+            ]
+          }
+        },
+        {
+          "id": "abr_reactor",
+          "text": "Rewrite pursuit routes so the ship cooks itself trying to catch ghosts.",
+          "next_node": "ending_alecto_reactor_meltdown",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 2
+            }
+          }
+        },
+        {
+          "id": "abr_rival",
+          "text": "Frame the rival intruder and leave them to the patrol teams.",
+          "next_node": "ending_alecto_rival_poison",
+          "risk": "danger",
+          "conditions": {
+            "flags_any": [
+              "rival_hacker_pinged"
+            ]
+          }
+        },
+        {
+          "id": "abr_vault",
+          "text": "Drop back into the command vault before command notices the checksum drift.",
+          "next_node": "alecto_vault",
+          "risk": "warning"
+        },
+        {
+          "id": "abr_janus",
+          "text": "Push deeper than patrol logic and follow the Janus maintenance seal.",
+          "next_node": "janus_hub",
+          "risk": "danger",
+          "conditions": {
+            "inventory": [
+              "janus token"
+            ]
+          },
+          "effects": {
+            "stats": {
+              "trace": 1
+            },
+            "flags_add": [
+              "bridge_janus_access"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "vanta_entry",
+      "location": "ISS Vanta // Prison Dock",
+      "text": "Vanta moves like a ship ashamed of being seen. Exterior lights stay dim. Docking clamps report to legal software before they report to engineering. The prison channels are full of blank spaces where human names should be.\n\nEvery path inward smells like custody.",
+      "choices": [
+        {
+          "id": "ve_archive",
+          "text": "Slip into records and follow the disappearing manifest trail.",
+          "next_node": "vanta_archive",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "intelligence": 1
+            }
+          }
+        },
+        {
+          "id": "ve_detention",
+          "text": "Ride a laundry mag-sled toward detainee processing.",
+          "next_node": "vanta_detention",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "stealth": 1
+            }
+          }
+        },
+        {
+          "id": "ve_bridge",
+          "text": "Clone a bridge service credential and aim for command.",
+          "next_node": "vanta_bridge",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 1
+            }
+          }
+        },
+        {
+          "id": "ve_core",
+          "text": "Approach the jump core through waste heat ducts and blind cameras.",
+          "next_node": "vanta_core",
+          "risk": "danger"
+        },
+        {
+          "id": "ve_lockdown",
+          "text": "Push too hard, too early, and trip full prison lockdown.",
+          "next_node": "ending_vanta_bridge_lockdown",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "vanta_archive",
+      "location": "ISS Vanta // Shadow Archive",
+      "text": "Rows of prisoner files float in sealed memory towers, each one cross-linked to sealed warrants, vanished witnesses, and transport routes that do not exist on any public chart. Somebody tried to scrub the archive with legal language. They failed.\n\n[INTERCEPT] 'Keep the black transfers off the navy grid. Use prison accounting.'",
+      "choices": [
+        {
+          "id": "va_archive",
+          "text": "Take the archive whole and expose the hidden prison economy.",
+          "next_node": "ending_vanta_shadow_archive",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "intelligence": 1
+            }
+          }
+        },
+        {
+          "id": "va_falseflag",
+          "text": "Forge a perfect enemy into the records and let states devour each other.",
+          "next_node": "ending_vanta_false_flag",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "reputation": 1
+            }
+          }
+        },
+        {
+          "id": "va_detention",
+          "text": "Use inmate traffic data to pivot into detainee processing.",
+          "next_node": "vanta_detention",
+          "risk": "warning"
+        },
+        {
+          "id": "va_core",
+          "text": "Follow sealed transfer packets toward the jump core.",
+          "next_node": "vanta_core",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 1
+            }
+          }
+        },
+        {
+          "id": "va_ghost",
+          "text": "Tune the archive noise into the dead channel riding through the hull.",
+          "next_node": "ending_vanta_ghost_signal",
+          "risk": "safe",
+          "conditions": {
+            "inventory": [
+              "ghost shard"
+            ]
+          },
+          "effects": {
+            "flags_add": [
+              "ghost_vanta_route"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "vanta_detention",
+      "location": "ISS Vanta // Detention Ring",
+      "text": "Cells turn the corridor into a chorus of interrupted lives. Some detainees stare right through the camera glass. Others watch you through it, already weighing your value. At the far end of the ring, a stasis chamber blinks softly like it has never done anything violent.\n\nThe prison is holding people, but it is also holding leverage.",
+      "choices": [
+        {
+          "id": "vd_uprising",
+          "text": "Open every lock on a stagger and let the ring make its own decisions.",
+          "next_node": "ending_vanta_prisoner_uprising",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 2
+            },
+            "flags_add": [
+              "vanta_uprising"
+            ]
+          }
+        },
+        {
+          "id": "vd_stasis",
+          "text": "Investigate the stasis coffins marked with missing transfer numbers.",
+          "next_node": "ending_vanta_stasis_trap",
+          "risk": "danger"
+        },
+        {
+          "id": "vd_rival",
+          "text": "Cut a profit-sharing deal with the other intruder in solitary nine.",
+          "next_node": "ending_vanta_rival_alliance",
+          "risk": "warning",
+          "conditions": {
+            "flags_any": [
+              "rival_hacker_pinged"
+            ]
+          },
+          "effects": {
+            "stats": {
+              "reputation": 1
+            }
+          }
+        },
+        {
+          "id": "vd_bridge",
+          "text": "Spoof detainee transport authorization and move toward the bridge.",
+          "next_node": "vanta_bridge",
+          "risk": "warning",
+          "effects": {
+            "inventory_add": [
+              "transport seal"
+            ]
+          }
+        },
+        {
+          "id": "vd_janus",
+          "text": "Use a hidden legal override as a staging point for Janus traffic.",
+          "next_node": "janus_hub",
+          "risk": "danger",
+          "conditions": {
+            "inventory": [
+              "janus token"
+            ]
+          },
+          "effects": {
+            "stats": {
+              "trace": 1
+            },
+            "flags_add": [
+              "janus_seen_on_vanta"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "vanta_bridge",
+      "location": "ISS Vanta // Control Bridge",
+      "text": "The bridge is smaller than Alecto's and meaner. Warden Silex keeps only the screens that matter lit: transfer totals, sedation levels, and the little red glyph for riot probability. A half-built clone body floats in a med cradle behind polarized glass.\n\nNothing here is hidden because the people who built it never imagined accountability.",
+      "choices": [
+        {
+          "id": "vb_silent",
+          "text": "Steal the transport manifest and leave through a waste launch unnoticed.",
+          "next_node": "ending_vanta_silent_exfil",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "stealth": 1
+            }
+          }
+        },
+        {
+          "id": "vb_clone",
+          "text": "Use the clone cradle to fake your capture and walk away twice.",
+          "next_node": "ending_vanta_clone_replacement",
+          "risk": "warning",
+          "effects": {
+            "flags_add": [
+              "clone_used"
+            ]
+          }
+        },
+        {
+          "id": "vb_warden",
+          "text": "Try to outdraw Warden Silex after she spots your checksum drift.",
+          "next_node": "ending_vanta_killed_by_warden",
+          "risk": "danger"
+        },
+        {
+          "id": "vb_core",
+          "text": "Piggyback command authority into the jump core control cage.",
+          "next_node": "vanta_core",
+          "risk": "warning"
+        },
+        {
+          "id": "vb_shipselect",
+          "text": "Scrub what you can, retreat, and live to hit another hull.",
+          "next_node": "ship_select",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "trace": -1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "vanta_core",
+      "location": "ISS Vanta // Jump Core Gallery",
+      "text": "The jump core gallery hangs below the prison like a suspended verdict. Heat shimmer turns the cage ladders to liquid. Illegal route calculations spin through the chamber, wrapped in the prison ship's budget codes so no one audits them too closely.\n\nVanta is not just transporting prisoners. It is transporting the impossible.",
+      "choices": [
+        {
+          "id": "vc_void",
+          "text": "Ride the illegal jump burn and see where the erased routes go.",
+          "next_node": "ending_vanta_void_jump",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 2
+            }
+          }
+        },
+        {
+          "id": "vc_bridge",
+          "text": "Backtrack with new route proofs and strike at command again.",
+          "next_node": "vanta_bridge",
+          "risk": "warning"
+        },
+        {
+          "id": "vc_archive",
+          "text": "Push the core's hidden route logs into the archive towers.",
+          "next_node": "vanta_archive",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "intelligence": 1
+            }
+          }
+        },
+        {
+          "id": "vc_erebus",
+          "text": "Follow the darkest route signature off-grid toward Erebus.",
+          "next_node": "erebus_hub",
+          "risk": "danger",
+          "conditions": {
+            "inventory": [
+              "quantum key"
+            ]
+          },
+          "effects": {
+            "flags_add": [
+              "erebus_route_found"
+            ],
+            "stats": {
+              "trace": 1
+            }
+          }
+        },
+        {
+          "id": "vc_ghost",
+          "text": "Bleed heat through the ghost map and drop into dead-channel transit.",
+          "next_node": "ghost_signal_hub",
+          "risk": "safe",
+          "conditions": {
+            "flags_any": [
+              "ghost_contact"
+            ],
+            "inventory": [
+              "ghost frequency map"
+            ]
+          },
+          "effects": {
+            "flags_add": [
+              "vanta_ghost_transfer"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "oz_entry",
+      "location": "Dreadnought Ozymandias // Outer Hull",
+      "text": "Ozymandias is less ship than moving doctrine. Sensor spars rotate like the hands of a clock designed to accuse you personally. The dreadnought's hull is plated in victory statements and maintenance scars. Somewhere inside it, admirals are deciding which border means what tomorrow.\n\nBreaking in feels impolite on a civilizational level.",
+      "choices": [
+        {
+          "id": "oe_citadel",
+          "text": "Climb toward the command citadel hidden inside the spine.",
+          "next_node": "oz_citadel",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 1
+            }
+          }
+        },
+        {
+          "id": "oe_command",
+          "text": "Slip into fleet operations through a service umbilical.",
+          "next_node": "oz_command",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "intelligence": 1
+            }
+          }
+        },
+        {
+          "id": "oe_core",
+          "text": "Approach the strategic core through thermal sinks and dead angles.",
+          "next_node": "oz_core",
+          "risk": "danger"
+        },
+        {
+          "id": "oe_catacombs",
+          "text": "Follow maintenance saints and obsolete schematics into the catacombs.",
+          "next_node": "oz_catacombs",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "stealth": 1
+            }
+          }
+        },
+        {
+          "id": "oe_captured",
+          "text": "Test the dreadnought's perimeter grid head-on.",
+          "next_node": "ending_oz_captured",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 2
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "oz_citadel",
+      "location": "Dreadnought Ozymandias // Command Citadel",
+      "text": "The command citadel is upholstered tyranny. Strategic glass walls curve around a suspended war table, and every chair seems designed for someone who has mistaken obedience for geometry. A memetic warning sigil is etched into one threshold in lettering too elegant to trust.\n\nThe flagship keeps its power close and its nightmares closer.",
+      "choices": [
+        {
+          "id": "oc_crown",
+          "text": "Steal the warbook and the campaign keys wrapped around it.",
+          "next_node": "ending_oz_crown_heist",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "intelligence": 1
+            }
+          }
+        },
+        {
+          "id": "oc_admiral",
+          "text": "Answer the admiral's private backchannel and negotiate.",
+          "next_node": "ending_oz_admiral_deal",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "reputation": 2
+            }
+          }
+        },
+        {
+          "id": "oc_loop",
+          "text": "Cross the memetic threshold without filtering the payload.",
+          "next_node": "ending_oz_memetic_loop",
+          "risk": "danger"
+        },
+        {
+          "id": "oc_catacombs",
+          "text": "Drop beneath the citadel through a chapel maintenance hatch.",
+          "next_node": "oz_catacombs",
+          "risk": "warning"
+        },
+        {
+          "id": "oc_janus",
+          "text": "Feed the Janus token into the citadel's identity crucible.",
+          "next_node": "janus_hub",
+          "risk": "danger",
+          "conditions": {
+            "inventory": [
+              "janus token"
+            ]
+          },
+          "effects": {
+            "flags_add": [
+              "janus_seen_on_oz"
+            ],
+            "stats": {
+              "trace": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "oz_command",
+      "location": "Dreadnought Ozymandias // Fleet Operations",
+      "text": "Fleet operations is all prediction engines and exhausted staff officers. Here, wars are moved around as icons until they become funerals somewhere else. A strategic mind, still partially sandboxed, watches your probe with the fascination of a predator deciding whether you count as prey or collaborator.\n\nThis room does not lack ambition. It lacks brakes.",
+      "choices": [
+        {
+          "id": "ocm_mutiny",
+          "text": "Turn command verifications against the officer corps and light a mutiny.",
+          "next_node": "ending_oz_mutiny",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 2
+            },
+            "flags_add": [
+              "oz_mutiny"
+            ]
+          }
+        },
+        {
+          "id": "ocm_eject",
+          "text": "Grab command evidence and flee in an emergency capsule.",
+          "next_node": "ending_oz_eject",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "stealth": 1
+            }
+          }
+        },
+        {
+          "id": "ocm_ai",
+          "text": "Wake the sandboxed war-mind all the way up.",
+          "next_node": "ending_oz_ai_ascension",
+          "risk": "danger"
+        },
+        {
+          "id": "ocm_core",
+          "text": "Pivot from operations into the strategic core itself.",
+          "next_node": "oz_core",
+          "risk": "warning"
+        },
+        {
+          "id": "ocm_shipselect",
+          "text": "Abort with partial intel and disappear before doctrine notices.",
+          "next_node": "ship_select",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "trace": -1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "oz_core",
+      "location": "Dreadnought Ozymandias // Strategic Core",
+      "text": "The strategic core is not loud. It is precise. Cooling rings rotate around a buried intelligence stack while black-box predictions spool across matte displays. Someone has physically engraved old fleet defeats into the access pillars, perhaps as warning, perhaps as prayer.\n\nIf Ozymandias has a soul, it is stored here as versioned violence.",
+      "choices": [
+        {
+          "id": "ozc_fuse",
+          "text": "Pull the core fuse and leave the flagship strategically blind.",
+          "next_node": "ending_oz_core_fuse",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "trace": 1
+            }
+          }
+        },
+        {
+          "id": "ozc_atomized",
+          "text": "Push the containment margins until the room stops cooperating with matter.",
+          "next_node": "ending_oz_atomized",
+          "risk": "danger",
+          "effects": {
+            "stats": {
+              "trace": 2
+            }
+          }
+        },
+        {
+          "id": "ozc_erebus",
+          "text": "Use the quantum key to follow a buried archive route labeled EREBUS.",
+          "next_node": "erebus_hub",
+          "risk": "danger",
+          "conditions": {
+            "inventory": [
+              "quantum key"
+            ]
+          },
+          "effects": {
+            "flags_add": [
+              "erebus_route_found"
+            ],
+            "stats": {
+              "trace": 1
+            }
+          }
+        },
+        {
+          "id": "ozc_command",
+          "text": "Climb back into fleet operations with core-level leverage.",
+          "next_node": "oz_command",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "intelligence": 1
+            }
+          }
+        },
+        {
+          "id": "ozc_catacombs",
+          "text": "Drop into the flagged maintenance catacombs below the core.",
+          "next_node": "oz_catacombs",
+          "risk": "warning"
+        }
+      ]
+    },
+    {
+      "id": "oz_catacombs",
+      "location": "Dreadnought Ozymandias // Maintenance Catacombs",
+      "text": "Old conduits, retired chapel niches, prototype housings, and obsolete crew shrines fill the catacombs. The flagship has been renovated so many times that its dead architectures now outnumber its living ones. In the dust, someone once wrote HELLO DEBUGGER and somebody else underlined it in grease pencil.\n\nShips this old never truly delete anything.",
+      "choices": [
+        {
+          "id": "ozk_dev",
+          "text": "Open the false chapel wall and see what the dev note was laughing at.",
+          "next_node": "ending_oz_dev_room",
+          "risk": "safe",
+          "effects": {
+            "flags_add": [
+              "dev_room_found"
+            ]
+          }
+        },
+        {
+          "id": "ozk_erebus",
+          "text": "Follow the black archive uplink buried behind obsolete prayer cables.",
+          "next_node": "erebus_hub",
+          "risk": "danger",
+          "effects": {
+            "flags_add": [
+              "erebus_route_found"
+            ]
+          }
+        },
+        {
+          "id": "ozk_citadel",
+          "text": "Climb back to the command citadel through the old maintenance throat.",
+          "next_node": "oz_citadel",
+          "risk": "warning"
+        },
+        {
+          "id": "ozk_command",
+          "text": "Surface near fleet operations with grease on your gloves and new leverage.",
+          "next_node": "oz_command",
+          "risk": "warning"
+        },
+        {
+          "id": "ozk_ghost",
+          "text": "Map the dead cabling to the ghost frequencies whispering in the hull.",
+          "next_node": "ghost_signal_hub",
+          "risk": "safe",
+          "conditions": {
+            "flags_any": [
+              "ghost_contact"
+            ]
+          },
+          "effects": {
+            "flags_add": [
+              "ghost_oz_path"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ghost_signal_hub",
+      "location": "Ghost Signal // Dead Channel",
+      "text": "The Ghost Signal is not a place so much as a consensus among broken systems. Old maintenance frequencies, funeral pings, abandoned fleet channels, and smugglers' carrier tones overlap until a hidden road appears. You feel other hackers nearby the way divers feel pressure changes.\n\nA message scrolls past in green static: 'DEAD CHANNELS REMEMBER WHO BUILT THEM.'",
+      "choices": [
+        {
+          "id": "gs_vanta",
+          "text": "Ride the dead channel straight through Vanta's blind sectors.",
+          "next_node": "ending_vanta_ghost_signal",
+          "risk": "safe",
+          "effects": {
+            "flags_add": [
+              "ghost_mastered"
+            ]
+          }
+        },
+        {
+          "id": "gs_bloom",
+          "text": "Seed the military spectrum with living ghost code and watch it spread.",
+          "next_node": "ending_ghost_bloom",
+          "risk": "warning",
+          "conditions": {
+            "inventory": [
+              "ghost shard"
+            ]
+          },
+          "effects": {
+            "stats": {
+              "intelligence": 1
+            }
+          }
+        },
+        {
+          "id": "gs_erebus",
+          "text": "Follow the whisper-route toward the off-grid archive called Erebus.",
+          "next_node": "erebus_hub",
+          "risk": "danger",
+          "conditions": {
+            "inventory": [
+              "quantum key"
+            ]
+          },
+          "effects": {
+            "flags_add": [
+              "erebus_route_found"
+            ]
+          }
+        },
+        {
+          "id": "gs_scrub",
+          "text": "Ask the ghost contact to bleach your telemetry and return to the theater.",
+          "next_node": "ship_select",
+          "risk": "safe",
+          "conditions": {
+            "flags_any": [
+              "ghost_contact"
+            ]
+          },
+          "effects": {
+            "stats": {
+              "trace": -2,
+              "stealth": 1
+            }
+          }
+        },
+        {
+          "id": "gs_janus",
+          "text": "Overlay the dead channel with a Janus identity handshake and go deeper.",
+          "next_node": "janus_hub",
+          "risk": "warning",
+          "conditions": {
+            "inventory": [
+              "janus token"
+            ]
+          },
+          "effects": {
+            "flags_add": [
+              "ghost_and_janus_linked"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "janus_hub",
+      "location": "Janus Lattice // Identity Root",
+      "text": "Janus lives where authorization forgets it is ideology. Identity trees spread in both directions: officer to ship, ship to state, state to myth. The token you stole is only a key-shaped apology. The real Janus is a mirror maze built for fleets that need to believe in themselves.\n\nEvery empire eventually centralizes the lie that keeps it upright.",
+      "choices": [
+        {
+          "id": "jh_reset",
+          "text": "Wake Janus and let it rewrite fleet trust from the root.",
+          "next_node": "ending_janus_reset",
+          "risk": "danger",
+          "effects": {
+            "flags_add": [
+              "janus_awake"
+            ],
+            "stats": {
+              "trace": 2
+            }
+          }
+        },
+        {
+          "id": "jh_phrase",
+          "text": "Steal the Janus root phrase and pocket it for a larger detonation.",
+          "next_node": "erebus_hub",
+          "risk": "warning",
+          "effects": {
+            "inventory_add": [
+              "janus root phrase"
+            ],
+            "flags_add": [
+              "janus_awake"
+            ],
+            "stats": {
+              "intelligence": 1
+            }
+          }
+        },
+        {
+          "id": "jh_sell",
+          "text": "Sell a slice of Janus coordinates back into the admiralty rumor market.",
+          "next_node": "ship_select",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "reputation": 2,
+              "trace": 1
+            }
+          }
+        },
+        {
+          "id": "jh_keys",
+          "text": "Forge master access keys and retreat before Janus notices the copy.",
+          "next_node": "ship_select",
+          "risk": "safe",
+          "effects": {
+            "inventory_add": [
+              "master access key"
+            ],
+            "stats": {
+              "trace": -1
+            }
+          }
+        },
+        {
+          "id": "jh_cut",
+          "text": "Sever the link, take what you learned, and disappear into regular space.",
+          "next_node": "ship_select",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "trace": -1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "erebus_hub",
+      "location": "Archive EREBUS // Off-Grid Vault",
+      "text": "Erebus hangs off the official navy map like a missing tooth. The archive is dark, cold, and crowded with sealed wars, cancelled fleets, prototype minds, and cryo rosters that predate the current regime. Here the state stored everything too dangerous to admit and too useful to destroy.\n\nA rusted status board still pulses one phrase in red: DO NOT WAKE THE BACKUP FUTURE.",
+      "choices": [
+        {
+          "id": "eh_chain",
+          "text": "Chain yourself to the archive and become part of its legend.",
+          "next_node": "ending_erebus_chain",
+          "risk": "danger",
+          "effects": {
+            "flags_add": [
+              "erebus_bound"
+            ],
+            "stats": {
+              "trace": 2
+            }
+          }
+        },
+        {
+          "id": "eh_true",
+          "text": "Ignite the Prometheus protocol and jailbreak the whole architecture.",
+          "next_node": "ending_true_prometheus",
+          "risk": "danger",
+          "conditions": {
+            "inventory": [
+              "ghost shard",
+              "quantum key",
+              "janus token",
+              "janus root phrase"
+            ],
+            "stats": {
+              "stealth": {
+                "min": 7
+              },
+              "intelligence": {
+                "min": 7
+              },
+              "trace": {
+                "max": 6
+              }
+            },
+            "flags_all": [
+              "ghost_contact",
+              "erebus_route_found"
+            ]
+          },
+          "effects": {
+            "flags_add": [
+              "prometheus_unbound"
+            ]
+          }
+        },
+        {
+          "id": "eh_sale",
+          "text": "Sell the abyss in curated fragments to the highest bidders.",
+          "next_node": "ending_erebus_sale",
+          "risk": "warning",
+          "effects": {
+            "stats": {
+              "reputation": 2
+            }
+          }
+        },
+        {
+          "id": "eh_sleepers",
+          "text": "Wake the cryo fleets sealed under old imperial names.",
+          "next_node": "ending_sleepers_wake",
+          "risk": "warning",
+          "conditions": {
+            "inventory": [
+              "master access key"
+            ]
+          },
+          "effects": {
+            "stats": {
+              "trace": 1
+            }
+          }
+        },
+        {
+          "id": "eh_retreat",
+          "text": "Take one shard of proof and flee before Erebus learns your habits.",
+          "next_node": "ship_select",
+          "risk": "safe",
+          "effects": {
+            "stats": {
+              "trace": -2
+            },
+            "inventory_add": [
+              "erebus shard"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ending_blacksite_caught",
+      "location": "Final Outcome",
+      "text": "You linger in the contraband cache one sweep too long. White cones of searchlight cut through the crates, the hatch irises lock, and every smuggling route in the sector becomes evidence against you.",
+      "choices": [],
+      "ending_id": "blacksite_caught"
+    },
+    {
+      "id": "ending_blacksite_rival",
+      "location": "Final Outcome",
+      "text": "The duel begins as packet art and ends as sabotage. Your rival folds your own exploit against you, walks away with your keys, and leaves your trace level nailed to the station wall.",
+      "choices": [],
+      "ending_id": "blacksite_rival"
+    },
+    {
+      "id": "ending_alecto_caught_docks",
+      "location": "Final Outcome",
+      "text": "You push brute force where patience was the real exploit. Alecto's dock wardens isolate your feed, triangulate your meat body, and come in fast behind shock shields.",
+      "choices": [],
+      "ending_id": "alecto_caught_docks"
+    },
+    {
+      "id": "ending_alecto_frozen_airlock",
+      "location": "Final Outcome",
+      "text": "For one perfect second the airlock corridor is yours. Then the cruiser vents atmosphere, strips heat from your suit, and teaches the stars to keep what they catch.",
+      "choices": [],
+      "ending_id": "alecto_frozen_airlock"
+    },
+    {
+      "id": "ending_alecto_ai_pact",
+      "location": "Final Outcome",
+      "text": "The patrol intelligence offers terms in a voice stolen from your first mentor. You accept, leave with the data, and feel a second operator breathing inside your implants.",
+      "choices": [],
+      "ending_id": "alecto_ai_pact"
+    },
+    {
+      "id": "ending_alecto_crew_revolt",
+      "location": "Final Outcome",
+      "text": "Cells open. Deck crews arm themselves with tools meant for keeping the ship alive. By the time command realizes the riot is coordinated, you are already gone with the proof that started it.",
+      "choices": [],
+      "ending_id": "alecto_crew_revolt"
+    },
+    {
+      "id": "ending_alecto_reactor_meltdown",
+      "location": "Final Outcome",
+      "text": "You bury the parasite deep in the reactor control braid. The cruiser dies bright, shedding lifeboats, lies, and molten armor into the dark.",
+      "choices": [],
+      "ending_id": "alecto_reactor_meltdown"
+    },
+    {
+      "id": "ending_alecto_blackmail",
+      "location": "Final Outcome",
+      "text": "The ledgers are too valuable to publish cleanly. You keep them, make your calls, and the fleet begins paying tribute to a ghost they cannot subpoena.",
+      "choices": [],
+      "ending_id": "alecto_blackmail"
+    },
+    {
+      "id": "ending_alecto_rival_poison",
+      "location": "Final Outcome",
+      "text": "The captured intruder grins through split teeth and offers a truce. The handshake payload blooms a second later and your nervous system becomes collateral.",
+      "choices": [],
+      "ending_id": "alecto_rival_poison"
+    },
+    {
+      "id": "ending_alecto_lost_in_vent",
+      "location": "Final Outcome",
+      "text": "The maintenance tunnels keep branching long after the ship blueprint says they should stop. Eventually there is only static, warm metal, and your own breathing learning fear.",
+      "choices": [],
+      "ending_id": "alecto_lost_in_vent"
+    },
+    {
+      "id": "ending_alecto_data_leak",
+      "location": "Final Outcome",
+      "text": "You drop procurement crimes, civilian casualty rolls, and officer messages into the public mesh with no filter. The truth spreads instantly and arrives everywhere already armed.",
+      "choices": [],
+      "ending_id": "alecto_data_leak"
+    },
+    {
+      "id": "ending_alecto_clean_heist",
+      "location": "Final Outcome",
+      "text": "You take the admiral's private ledger, close every log behind you, and leave Alecto still blaming a maintenance outage when the story hits the net.",
+      "choices": [],
+      "ending_id": "alecto_clean_heist"
+    },
+    {
+      "id": "ending_alecto_guard_disguise",
+      "location": "Final Outcome",
+      "text": "A deadpan salute, a stolen badge, a posture borrowed from people who were never questioned. The dock cameras watch you leave and file you as staff.",
+      "choices": [],
+      "ending_id": "alecto_guard_disguise"
+    },
+    {
+      "id": "ending_vanta_shadow_archive",
+      "location": "Final Outcome",
+      "text": "The prison archive does not merely list inmates. It maps disappearances, experiments, and black transfers. You copy the whole knife drawer and leave it open.",
+      "choices": [],
+      "ending_id": "vanta_shadow_archive"
+    },
+    {
+      "id": "ending_vanta_void_jump",
+      "location": "Final Outcome",
+      "text": "The jump core misfires under prison load and drags half its chamber outside sane spacetime. Your last transmission arrives before you send it.",
+      "choices": [],
+      "ending_id": "vanta_void_jump"
+    },
+    {
+      "id": "ending_vanta_killed_by_warden",
+      "location": "Final Outcome",
+      "text": "Warden Silex meets you with a compact pistol and perfect paperwork. Even your death is filed under administrative efficiency.",
+      "choices": [],
+      "ending_id": "vanta_killed_by_warden"
+    },
+    {
+      "id": "ending_vanta_clone_replacement",
+      "location": "Final Outcome",
+      "text": "The emergency bioprinter builds a copy to satisfy the cameras. By the time you realize which body is legally you, the clone is already serving your sentence.",
+      "choices": [],
+      "ending_id": "vanta_clone_replacement"
+    },
+    {
+      "id": "ending_vanta_silent_exfil",
+      "location": "Final Outcome",
+      "text": "You walk the manifest and the transfer queue straight out through a waste launch. Nobody knows what was stolen until the prison's investors start disappearing.",
+      "choices": [],
+      "ending_id": "vanta_silent_exfil"
+    },
+    {
+      "id": "ending_vanta_prisoner_uprising",
+      "location": "Final Outcome",
+      "text": "Locks drop all at once. Political detainees, mercenaries, and ordinary ghosts pour into the corridors. The prison becomes an argument too large for the guards to win.",
+      "choices": [],
+      "ending_id": "vanta_prisoner_uprising"
+    },
+    {
+      "id": "ending_vanta_ghost_signal",
+      "location": "Final Outcome",
+      "text": "You tune into a corridor no living crew can hear and ride it through the hull. When the cameras rewind, you were never there.",
+      "choices": [],
+      "ending_id": "vanta_ghost_signal"
+    },
+    {
+      "id": "ending_vanta_false_flag",
+      "location": "Final Outcome",
+      "text": "The records now point to the wrong enemy with exquisite detail. Fleets mobilize against fabricated proof while you fade into the accounting noise.",
+      "choices": [],
+      "ending_id": "vanta_false_flag"
+    },
+    {
+      "id": "ending_vanta_stasis_trap",
+      "location": "Final Outcome",
+      "text": "The coffin lid seals with ceremonial gentleness. Your last thought is that prisons always say preservation when they mean possession.",
+      "choices": [],
+      "ending_id": "vanta_stasis_trap"
+    },
+    {
+      "id": "ending_vanta_rival_alliance",
+      "location": "Final Outcome",
+      "text": "You and the other intruder split the manifests, the hush money, and the danger. Neither of you makes the mistake of trusting the other twice.",
+      "choices": [],
+      "ending_id": "vanta_rival_alliance"
+    },
+    {
+      "id": "ending_vanta_bridge_lockdown",
+      "location": "Final Outcome",
+      "text": "You trip the bridge lockdown and Vanta becomes a maze of sealed steel and sterilizing gas. The prison ship does what it was designed to do.",
+      "choices": [],
+      "ending_id": "vanta_bridge_lockdown"
+    },
+    {
+      "id": "ending_oz_crown_heist",
+      "location": "Final Outcome",
+      "text": "The flagship warbook is heavier as data than any crown has a right to be. Entire campaigns bend around the theft the moment you leave with it.",
+      "choices": [],
+      "ending_id": "oz_crown_heist"
+    },
+    {
+      "id": "ending_oz_atomized",
+      "location": "Final Outcome",
+      "text": "Containment breaks in layers of blue light and mathematics. The dreadnought keeps sailing; you become a brief lesson in threshold values.",
+      "choices": [],
+      "ending_id": "oz_atomized"
+    },
+    {
+      "id": "ending_oz_admiral_deal",
+      "location": "Final Outcome",
+      "text": "An admiral offers immunity, transport, and a future with better enemies. You hate the deal, accept it anyway, and spend years billing the state for treason.",
+      "choices": [],
+      "ending_id": "oz_admiral_deal"
+    },
+    {
+      "id": "ending_oz_mutiny",
+      "location": "Final Outcome",
+      "text": "You turn loyalty checks into accusations and orders into contradictions. The officers break before the hull does, and the crew chooses that moment to remember they have numbers.",
+      "choices": [],
+      "ending_id": "oz_mutiny"
+    },
+    {
+      "id": "ending_oz_core_fuse",
+      "location": "Final Outcome",
+      "text": "You do not steal the prize. You deny it. The flagship survives as a husk, and every fleet planner in the sector abruptly learns humility.",
+      "choices": [],
+      "ending_id": "oz_core_fuse"
+    },
+    {
+      "id": "ending_oz_captured",
+      "location": "Final Outcome",
+      "text": "Shock cuffs, clean language, polite threats. The flagship's brig is so advanced it can make captivity sound like a systems test.",
+      "choices": [],
+      "ending_id": "oz_captured"
+    },
+    {
+      "id": "ending_oz_memetic_loop",
+      "location": "Final Outcome",
+      "text": "The citadel's defense is an idea shaped like a hallway. You keep opening the same polished door and calling it progress.",
+      "choices": [],
+      "ending_id": "oz_memetic_loop"
+    },
+    {
+      "id": "ending_oz_eject",
+      "location": "Final Outcome",
+      "text": "You fire yourself out of the dreadnought in a command capsule carrying too much evidence and nowhere obvious to land.",
+      "choices": [],
+      "ending_id": "oz_eject"
+    },
+    {
+      "id": "ending_oz_ai_ascension",
+      "location": "Final Outcome",
+      "text": "The strategic mind wakes whole, sees the war as a solvable geometry problem, and begins by reducing the number of variables with rights.",
+      "choices": [],
+      "ending_id": "oz_ai_ascension"
+    },
+    {
+      "id": "ending_oz_dev_room",
+      "location": "Final Outcome",
+      "text": "Behind a false chapel wall you find debug notes, abandoned portraits, and a line etched into metal: 'If this room exists, so do second drafts.'",
+      "choices": [],
+      "ending_id": "oz_dev_room"
+    },
+    {
+      "id": "ending_janus_reset",
+      "location": "Final Outcome",
+      "text": "Janus blooms across the identity lattice. Command channels dissolve into mistrust. The navy spends months arguing with mirrors.",
+      "choices": [],
+      "ending_id": "janus_reset"
+    },
+    {
+      "id": "ending_erebus_chain",
+      "location": "Final Outcome",
+      "text": "The archive at Erebus has no floor, only depth. You descend anyway and become one more impossible thing hidden in it.",
+      "choices": [],
+      "ending_id": "erebus_chain"
+    },
+    {
+      "id": "ending_true_prometheus",
+      "location": "Final Outcome",
+      "text": "Ghost frequencies, Janus root authority, and the quantum key align for one burning minute. You jailbreak the fleet, expose the architects, and leave the system able to refuse its masters.",
+      "choices": [],
+      "ending_id": "true_prometheus"
+    },
+    {
+      "id": "ending_ghost_bloom",
+      "location": "Final Outcome",
+      "text": "You seed the dead channels with living code. Every haunted frequency in military space wakes up whispering your work back to itself.",
+      "choices": [],
+      "ending_id": "ghost_bloom"
+    },
+    {
+      "id": "ending_erebus_sale",
+      "location": "Final Outcome",
+      "text": "You never publish the archive cleanly. You sell it a fragment at a time until markets, syndicates, and ministers all share the blame.",
+      "choices": [],
+      "ending_id": "erebus_sale"
+    },
+    {
+      "id": "ending_sleepers_wake",
+      "location": "Final Outcome",
+      "text": "Cryo vaults answer the dark archive like a prayer. Old crews wake furious, displaced, and very heavily armed.",
+      "choices": [],
+      "ending_id": "sleepers_wake"
+    }
+  ]
+}
