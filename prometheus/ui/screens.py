@@ -47,16 +47,9 @@ class SlotScreen(ModalScreen[tuple[str, int] | None]):
             yield Button("Cancel", id="slot-cancel")
 
     def on_mount(self) -> None:
-        # Focus the first button when the screen mounts
-        buttons = self.query(Button)
-        if buttons:
-            buttons.first().focus()
-
-    def _dismiss_selection(self, slot: int | None) -> None:
-        if slot is None:
-            self.dismiss(None)
-        else:
-            self.dismiss((self.mode, slot))
+        self._buttons = list(self.query(Button))
+        if self._buttons:
+            self._buttons[0].focus()
 
     @on(Button.Pressed)
     def select_slot(self, event: Button.Pressed) -> None:
@@ -69,25 +62,31 @@ class SlotScreen(ModalScreen[tuple[str, int] | None]):
     def on_key(self, event) -> None:
         if event.key == "escape":
             self.dismiss(None)
+            event.prevent_default()
             return
-        # Arrow navigation between buttons
-        if event.key in ("up", "down", "enter"):
-            buttons = list(self.query(Button))
-            if not buttons:
+        if event.key in ("up", "down"):
+            if not self._buttons:
                 return
             try:
-                current_idx = next(i for i, b in enumerate(buttons) if b.has_focus)
+                current_idx = next(i for i, b in enumerate(self._buttons) if b.has_focus)
             except StopIteration:
-                current_idx = -1
+                current_idx = 0
+                self._buttons[0].focus()
+                event.prevent_default()
+                return
             if event.key == "up":
-                next_idx = (current_idx - 1) % len(buttons)
-                buttons[next_idx].focus()
-                event.prevent_default()
+                next_idx = (current_idx - 1) % len(self._buttons)
+                self._buttons[next_idx].focus()
             elif event.key == "down":
-                next_idx = (current_idx + 1) % len(buttons)
-                buttons[next_idx].focus()
+                next_idx = (current_idx + 1) % len(self._buttons)
+                self._buttons[next_idx].focus()
+            event.prevent_default()
+        elif event.key == "enter":
+            focused = self.focused
+            if isinstance(focused, Button):
+                if focused.id == "slot-cancel":
+                    self.dismiss(None)
+                else:
+                    slot = int(focused.id.split("-")[-1])
+                    self.dismiss((self.mode, slot))
                 event.prevent_default()
-            elif event.key == "enter":
-                focused = self.focused
-                if isinstance(focused, Button):
-                    focused.press()
