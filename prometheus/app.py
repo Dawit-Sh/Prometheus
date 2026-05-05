@@ -206,7 +206,8 @@ class PrometheusApp(App):
 
     async def action_save_game(self) -> None:
         metadata = GameState.slot_metadata()
-        selection = await self.run_worker(self._save_game_flow(metadata), wait_for_result=True)
+        worker = self.run_worker(self._save_game_flow(metadata))
+        await worker.wait()
 
     async def _save_game_flow(self, metadata):
         selection = await self.push_screen_wait(SlotScreen("save", metadata))
@@ -217,7 +218,8 @@ class PrometheusApp(App):
 
     async def action_load_game(self) -> None:
         metadata = GameState.slot_metadata()
-        await self.run_worker(self._load_game_flow(metadata), wait_for_result=True)
+        worker = self.run_worker(self._load_game_flow(metadata))
+        await worker.wait()
 
     async def _load_game_flow(self, metadata):
         selection = await self.push_screen_wait(SlotScreen("load", metadata))
