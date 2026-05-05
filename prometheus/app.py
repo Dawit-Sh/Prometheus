@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 
+from textual import work
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import Container, Horizontal, Vertical
@@ -230,22 +231,24 @@ class PrometheusApp(App):
     async def action_restart(self) -> None:
         await self.present_result(self.loop.restart(self.start_node_id))
 
-    async def action_save_game(self) -> None:
-        metadata = GameState.slot_metadata()
-        await self._save_game_flow(metadata)
+    def action_save_game(self) -> None:
+        self._save_game_flow()
 
-    async def _save_game_flow(self, metadata) -> None:
+    @work(exclusive=True, group="modal")
+    async def _save_game_flow(self) -> None:
+        metadata = GameState.slot_metadata()
         selection = await self.push_screen_wait(SlotScreen("save", metadata))
         if selection:
             _, slot = selection
             self.loop.state.save_to_slot(slot)
             await self.push_screen(AlertScreen("SAVE COMPLETE", f"Slot {slot} updated.", "safe"))
 
-    async def action_load_game(self) -> None:
-        metadata = GameState.slot_metadata()
-        await self._load_game_flow(metadata)
+    def action_load_game(self) -> None:
+        self._load_game_flow()
 
-    async def _load_game_flow(self, metadata) -> None:
+    @work(exclusive=True, group="modal")
+    async def _load_game_flow(self) -> None:
+        metadata = GameState.slot_metadata()
         selection = await self.push_screen_wait(SlotScreen("load", metadata))
         if not selection:
             return
