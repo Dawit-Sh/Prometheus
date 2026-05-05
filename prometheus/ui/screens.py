@@ -4,8 +4,7 @@ from textual import on
 from textual.app import ComposeResult
 from textual.containers import Container, Vertical
 from textual.screen import ModalScreen
-from textual.widgets import Button, Label
-from textual.widget import Widget
+from textual.widgets import Button, Label, ListItem, ListView
 
 
 class AlertScreen(ModalScreen[None]):
@@ -26,26 +25,8 @@ class AlertScreen(ModalScreen[None]):
         self.dismiss(None)
 
 
-class SlotLine(Widget):
-    """A single line in the slot selection screen."""
-
-    def __init__(self, text: str, slot_num: int | None) -> None:
-        super().__init__()
-        self.text = text
-        self.slot_num = slot_num
-
-    def compose(self) -> ComposeResult:
-        yield Label(self.text, classes="slot-line-label")
-
-    def on_click(self) -> None:
-        self.screen._select(self.slot_num)
-
-
 class SlotScreen(ModalScreen[tuple[str, int] | None]):
     BINDINGS = [
-        ("up", "up", "Up"),
-        ("down", "down", "Down"),
-        ("enter", "select", "Select"),
         ("escape", "cancel", "Cancel"),
     ]
 
@@ -53,56 +34,35 @@ class SlotScreen(ModalScreen[tuple[str, int] | None]):
         super().__init__()
         self.mode = mode
         self.metadata = metadata
-        self._idx = 0
 
     def compose(self) -> ComposeResult:
         with Vertical(id="slot-modal"):
             yield Label(f"{self.mode.title()} Slot", classes="alert-title slot-header")
+            items = []
             for entry in self.metadata:
                 slot = entry["slot"]
                 if entry.get("empty"):
-                    label = f"  Slot {slot}: empty"
+                    label = f"Slot {slot}: empty"
                 else:
                     label = (
-                        f"  Slot {slot}: {entry.get('node')} | "
+                        f"Slot {slot}: {entry.get('node')} | "
                         f"trace {entry.get('trace')} | {entry.get('saved_at')}"
                     )
-                yield SlotLine(label, slot)
-            yield SlotLine("  Cancel", None)
-            yield Label("", id="slot-spacer")
+                items.append(ListItem(Label(label, classes="slot-label")))
+            items.append(ListItem(Label("Cancel", classes="slot-label")))
+            yield ListView(*items, id="slot-list")
 
     def on_mount(self) -> None:
-        self._lines = list(self.query(SlotLine))
-        if self._lines:
-            self._lines[0].add_class("highlighted")
-            self._lines[0].focus()
+        self.query_one("#slot-list", ListView).focus()
 
-    def _select(self, slot_num: int | None) -> None:
-        if slot_num is None:
+    @on(ListView.Selected, "#slot-list")
+    def on_select(self, event: ListView.Selected) -> None:
+        idx = event.list_view.index
+        if idx >= len(self.metadata):
             self.dismiss(None)
         else:
-            self.dismiss((self.mode, slot_num))
-
-    def action_up(self) -> None:
-        if not self._lines:
-            return
-        self._lines[self._idx].remove_class("highlighted")
-        self._idx = (self._idx - 1) % len(self._lines)
-        self._lines[self._idx].add_class("highlighted")
-        self._lines[self._idx].focus()
-
-    def action_down(self) -> None:
-        if not self._lines:
-            return
-        self._lines[self._idx].remove_class("highlighted")
-        self._idx = (self._idx + 1) % len(self._lines)
-        self._lines[self._idx].add_class("highlighted")
-        self._lines[self._idx].focus()
-
-    def action_select(self) -> None:
-        if not self._lines:
-            return
-        self._select(self._lines[self._idx].slot_num)
+            slot = self.metadata[idx]["slot"]
+            self.dismiss((self.mode, slot))
 
     def action_cancel(self) -> None:
         self.dismiss(None)
