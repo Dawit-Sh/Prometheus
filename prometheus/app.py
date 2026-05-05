@@ -64,11 +64,20 @@ class PrometheusApp(App):
         background: #111825;
         align: center middle;
     }
-    .slot-line-label {
+    .slot-label {
         padding: 1;
         color: #d8ffe7;
     }
-    SlotLine.highlighted .slot-line-label {
+    #slot-list {
+        width: 100%;
+        height: auto;
+        background: transparent;
+        border: none;
+    }
+    #slot-list > ListItem {
+        padding: 1;
+    }
+    #slot-list:focus > ListItem.-highlighted {
         background: #1a2744;
         color: cyan;
         text-style: bold;
