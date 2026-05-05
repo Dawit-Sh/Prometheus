@@ -26,6 +26,11 @@ class AlertScreen(ModalScreen[None]):
 
 
 class SlotScreen(ModalScreen[tuple[str, int] | None]):
+    BINDINGS = [
+        ("s", "do_nothing", "Save"),
+        ("l", "do_nothing", "Load"),
+    ]
+
     def __init__(self, mode: str, metadata: list[dict]) -> None:
         super().__init__()
         self.mode = mode
@@ -50,6 +55,10 @@ class SlotScreen(ModalScreen[tuple[str, int] | None]):
 
     def on_mount(self) -> None:
         self.query_one("#slot-list", OptionList).focus()
+
+    def action_do_nothing(self) -> None:
+        """Override s and l keys so they don't trigger App actions."""
+        pass
 
     @on(OptionList.OptionSelected, "#slot-list")
     def select_slot(self, event: OptionList.OptionSelected) -> None:
