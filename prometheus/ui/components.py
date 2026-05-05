@@ -48,7 +48,12 @@ class StatusPanel(Static):
 
 
 class ChoicePanel(Static):
-    def update_choices(self, choices: list[Choice], ending: Ending | None = None) -> None:
+    def update_choices(
+        self,
+        choices: list[Choice],
+        ending: Ending | None = None,
+        selected_index: int = 0,
+    ) -> None:
         if ending:
             self.update(
                 "\n".join(
@@ -66,9 +71,12 @@ class ChoicePanel(Static):
         lines = ["[b cyan]Choices[/b cyan]"]
         for index, choice in enumerate(choices, start=1):
             color = risk_to_rich_tag(choice.risk)
-            lines.append(f"[{color}]{index}.[/{color}] {escape(choice.text)}")
+            prefix = "[reverse]>[/reverse] " if index - 1 == selected_index else "  "
+            lines.append(f"{prefix}[{color}]{index}.[/{color}] {escape(choice.text)}")
         lines.append("")
-        lines.append("[b]Keys[/b] 1-6 choose  k skip  r restart  s save  l load  t typing  e effects")
+        lines.append(
+            "[b]Keys[/b] 1-6 choose  up/down move  enter select  k skip  r restart  s save  l load  t typing  e effects  q quit"
+        )
         self.update("\n".join(lines))
 
 

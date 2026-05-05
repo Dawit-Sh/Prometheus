@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from textual import on
 from textual.app import ComposeResult
+from textual.binding import Binding
 from textual.containers import Container, Vertical
 from textual.screen import ModalScreen
 from textual.widgets import Button, Label
@@ -29,6 +30,8 @@ class AlertScreen(ModalScreen[None]):
 class SlotRow(Widget):
     """A single row in the slot list."""
 
+    can_focus = True
+
     def __init__(self, text: str, slot_num: int | None) -> None:
         super().__init__()
         self.text = text
@@ -42,6 +45,12 @@ class SlotRow(Widget):
 
 
 class SlotScreen(ModalScreen[tuple[str, int] | None]):
+    BINDINGS = [
+        Binding("up", "move(-1)", show=False),
+        Binding("down", "move(1)", show=False),
+        Binding("enter", "confirm", show=False),
+        Binding("escape", "cancel", show=False),
+    ]
 
     def __init__(self, mode: str, metadata: list[dict]) -> None:
         super().__init__()
@@ -71,20 +80,17 @@ class SlotScreen(ModalScreen[tuple[str, int] | None]):
             self._rows[0].add_class("active")
             self._rows[0].focus()
 
-    def on_key(self, event) -> None:
-        key = event.key
-        if key == "up":
-            self._move(-1)
-            event.prevent_default()
-        elif key == "down":
-            self._move(1)
-            event.prevent_default()
-        elif key == "enter":
-            self._pick(self._rows[self._index].slot_num)
-            event.prevent_default()
-        elif key == "escape":
+    def action_move(self, delta: int) -> None:
+        self._move(delta)
+
+    def action_confirm(self) -> None:
+        if not self._rows:
             self.dismiss(None)
-            event.prevent_default()
+            return
+        self._pick(self._rows[self._index].slot_num)
+
+    def action_cancel(self) -> None:
+        self.dismiss(None)
 
     def _move(self, delta: int) -> None:
         if not self._rows:

@@ -105,6 +105,9 @@ class PrometheusApp(App):
         Binding("4", "choice(3)", "Choice 4"),
         Binding("5", "choice(4)", "Choice 5"),
         Binding("6", "choice(5)", "Choice 6"),
+        Binding("up", "move_choice(-1)", "Previous Choice", show=False),
+        Binding("down", "move_choice(1)", "Next Choice", show=False),
+        Binding("enter", "confirm_choice", "Select Choice", show=False),
         Binding("k", "skip_text", "Skip"),
         Binding("r", "restart", "Restart"),
         Binding("s", "save_game", "Save"),
@@ -127,6 +130,7 @@ class PrometheusApp(App):
         )
         self.skip_requested = False
         self.current_result: ChoiceResult | None = None
+        self.selected_choice_index = 0
 
     def compose(self) -> ComposeResult:
         with Container(id="root"):
@@ -143,6 +147,7 @@ class PrometheusApp(App):
 
     async def present_result(self, result: ChoiceResult) -> None:
         self.current_result = result
+        self.selected_choice_index = 0
         self.refresh_panels()
         await self.render_story_text(result.node.text)
         self.refresh_panels()
@@ -172,7 +177,16 @@ class PrometheusApp(App):
         self.query_one(HeaderBar).update_header(node.location, state)
         self.query_one(StatusPanel).update_state(state, self.progress)
         ending = self.current_result.ending if self.current_result else None
-        self.query_one(ChoicePanel).update_choices(self.loop.available_choices(), ending)
+        choices = self.loop.available_choices()
+        if choices:
+            self.selected_choice_index = min(self.selected_choice_index, len(choices) - 1)
+        else:
+            self.selected_choice_index = 0
+        self.query_one(ChoicePanel).update_choices(
+            choices,
+            ending,
+            selected_index=self.selected_choice_index,
+        )
 
     async def render_story_text(self, text: str) -> None:
         panel = self.query_one(StoryPanel)
@@ -218,8 +232,7 @@ class PrometheusApp(App):
 
     async def action_save_game(self) -> None:
         metadata = GameState.slot_metadata()
-        worker = self.run_worker(self._save_game_flow(metadata))
-        await worker.wait()
+        await self._save_game_flow(metadata)
 
     async def _save_game_flow(self, metadata) -> None:
         selection = await self.push_screen_wait(SlotScreen("save", metadata))
@@ -230,8 +243,7 @@ class PrometheusApp(App):
 
     async def action_load_game(self) -> None:
         metadata = GameState.slot_metadata()
-        worker = self.run_worker(self._load_game_flow(metadata))
-        await worker.wait()
+        await self._load_game_flow(metadata)
 
     async def _load_game_flow(self, metadata) -> None:
         selection = await self.push_screen_wait(SlotScreen("load", metadata))
@@ -254,3 +266,18 @@ class PrometheusApp(App):
         self.loop.state.config.effects_enabled = not self.loop.state.config.effects_enabled
         state = "enabled" if self.loop.state.config.effects_enabled else "disabled"
         await self.push_screen(AlertScreen("CONFIG", f"Visual effects {state}.", "safe"))
+
+    def action_move_choice(self, delta: int) -> None:
+        if self.current_result and self.current_result.ending:
+            return
+        choices = self.loop.available_choices()
+        if not choices:
+            return
+        self.selected_choice_index = (self.selected_choice_index + delta) % len(choices)
+        self.refresh_panels()
+
+    async def action_confirm_choice(self) -> None:
+        await self.action_choice(self.selected_choice_index)
+
+    def action_quit(self) -> None:
+        self.exit()
