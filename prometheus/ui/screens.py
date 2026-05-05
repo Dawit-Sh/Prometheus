@@ -39,7 +39,7 @@ class SlotScreen(ModalScreen[tuple[str, int] | None]):
     def compose(self) -> ComposeResult:
         with Vertical(id="slot-modal"):
             yield Label(f"{self.mode.title()} Slot", classes="alert-title")
-            option_list = OptionList(id="slot-list")
+            options = []
             for entry in self.metadata:
                 slot = entry["slot"]
                 if entry.get("empty"):
@@ -49,9 +49,9 @@ class SlotScreen(ModalScreen[tuple[str, int] | None]):
                         f"Slot {slot}: {entry.get('node')} | trace {entry.get('trace')} | "
                         f"{entry.get('saved_at')}"
                     )
-                option_list.add_option(label)
-            option_list.add_option("Cancel")
-            yield option_list
+                options.append(label)
+            options.append("Cancel")
+            yield OptionList(*options, id="slot-list")
 
     def on_mount(self) -> None:
         self.query_one("#slot-list", OptionList).focus()
