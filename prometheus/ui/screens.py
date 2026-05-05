@@ -5,8 +5,7 @@ from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Container, Vertical
 from textual.screen import ModalScreen
-from textual.widgets import Button, Label
-from textual.widget import Widget
+from textual.widgets import Button, Label, Static
 
 
 class AlertScreen(ModalScreen[None]):
@@ -27,18 +26,14 @@ class AlertScreen(ModalScreen[None]):
         self.dismiss(None)
 
 
-class SlotRow(Widget):
+class SlotRow(Static):
     """A single row in the slot list."""
 
     can_focus = True
 
     def __init__(self, text: str, slot_num: int | None) -> None:
-        super().__init__()
-        self.text = text
+        super().__init__(text, classes="slot-text")
         self.slot_num = slot_num
-
-    def compose(self) -> ComposeResult:
-        yield Label(self.text, classes="slot-text")
 
     def on_click(self) -> None:
         self.screen._pick(self.slot_num)

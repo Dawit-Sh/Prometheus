@@ -68,8 +68,9 @@ class PrometheusApp(App):
     .slot-text {
         padding: 1;
         color: #d8ffe7;
+        width: 100%;
     }
-    SlotRow.active .slot-text {
+    SlotRow.active {
         background: #1a2744;
         color: cyan;
         text-style: bold;
