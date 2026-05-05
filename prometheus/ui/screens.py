@@ -48,6 +48,9 @@ class SlotScreen(ModalScreen[tuple[str, int] | None]):
             option_list.add_option("Cancel")
             yield option_list
 
+    def on_mount(self) -> None:
+        self.query_one("#slot-list", OptionList).focus()
+
     @on(OptionList.OptionSelected, "#slot-list")
     def select_slot(self, event: OptionList.OptionSelected) -> None:
         if event.option_index == len(self.metadata):
