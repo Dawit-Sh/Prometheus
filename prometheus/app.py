@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import asyncio
 
-from textual.app import App, ComposeResult
+from textual.app import App, ComposeResult, work
 from textual.binding import Binding
 from textual.containers import Container, Horizontal, Vertical
 from textual.widgets import Footer
@@ -204,6 +204,7 @@ class PrometheusApp(App):
     async def action_restart(self) -> None:
         await self.present_result(self.loop.restart(self.start_node_id))
 
+    @work
     async def action_save_game(self) -> None:
         metadata = GameState.slot_metadata()
         selection = await self.push_screen_wait(SlotScreen("save", metadata))
@@ -212,6 +213,7 @@ class PrometheusApp(App):
             self.loop.state.save_to_slot(slot)
             await self.push_screen(AlertScreen("SAVE COMPLETE", f"Slot {slot} updated.", "safe"))
 
+    @work
     async def action_load_game(self) -> None:
         metadata = GameState.slot_metadata()
         selection = await self.push_screen_wait(SlotScreen("load", metadata))
