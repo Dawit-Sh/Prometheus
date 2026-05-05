@@ -58,8 +58,3 @@ class SlotScreen(ModalScreen[tuple[str, int] | None]):
         else:
             slot = self.metadata[event.option_index]["slot"]
             self.dismiss((self.mode, slot))
-
-    def on_key(self, event) -> None:
-        if event.key == "escape":
-            self.dismiss(None)
-            event.prevent_default()
