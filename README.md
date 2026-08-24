@@ -163,37 +163,3 @@ Once the game opens:
 | `t` | Toggle typing animation |
 | `e` | Toggle visual effects |
 | `q` | Quit |
-
-## GitHub Push Commands
-
-If this repository is already connected to GitHub and you want to push your changes:
-
-```bash
-git status
-git add .
-git commit -m "Build Prometheus Textual adventure game"
-git push origin main
-```
-
-If your default branch is `master` instead of `main`, use:
-
-```bash
-git push origin master
-```
-
-If you have not connected the local repository to GitHub yet, replace `<REPO_URL>` with your repository URL:
-
-```bash
-git remote add origin <REPO_URL>
-git branch -M main
-git add .
-git commit -m "Build Prometheus Textual adventure game"
-git push -u origin main
-```
-
-## Notes
-
-- The game is launched with `python main.py`
-- Only `textual` and `rich` are required beyond the Python standard library
-- Progress saves are stored locally in `prometheus/saves/`
-- Ending discovery is tracked across runs
